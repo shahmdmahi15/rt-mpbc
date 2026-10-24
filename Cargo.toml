@@ -1,0 +1,6 @@
+[workspace]
+members = [
+    "compiler",
+    "runtime-rust",
+]
+resolver = "2"
