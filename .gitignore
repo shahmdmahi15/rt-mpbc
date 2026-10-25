@@ -1,5 +1,7 @@
 # Build directories
 target/
+build*/
+dist/
 *.o
 *.a
 *.so
@@ -12,6 +14,9 @@ runtime-c/tests/test_fixed_arena
 runtime-c/tests/test_midpoint
 runtime-c/tests/test_multirate
 runtime-c/tests/test_observer
+runtime-c/tests/test_nonlinear
+runtime-c/tests/test_switched_dirac
+runtime-c/tests/test_fault_detector
 examples/01_ev_powertrain/ev_benchmark
 examples/02_fhe_muscle_actuator/muscle_benchmark
 examples/03_robotic_virtual_sensor/robot_benchmark

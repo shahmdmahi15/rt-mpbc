@@ -1,0 +1,10 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+exec_prefix=${prefix}
+libdir=${prefix}/@CMAKE_INSTALL_LIBDIR@
+includedir=${prefix}/@CMAKE_INSTALL_INCLUDEDIR@
+
+Name: rtmpbc
+Description: Real-Time Multi-Physics Bond-Graph Compiler & Symplectic Solver
+Version: @PROJECT_VERSION@
+Libs: -L${libdir} -lrtmpbc -lm
+Cflags: -I${includedir}

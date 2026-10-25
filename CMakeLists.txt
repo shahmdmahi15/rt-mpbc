@@ -51,6 +51,16 @@ install(EXPORT rtmpbcTargets
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/rtmpbc
 )
 
+# pkg-config file generation
+configure_file(
+    ${CMAKE_CURRENT_SOURCE_DIR}/rtmpbc.pc.in
+    ${CMAKE_CURRENT_BINARY_DIR}/rtmpbc.pc
+    @ONLY
+)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/rtmpbc.pc
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig
+)
+
 # CTest Testing Suite
 enable_testing()
 

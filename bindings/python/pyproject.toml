@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyrtmpbc"
+version = "1.1.0"
+description = "Python bindings and interface for RT-MPBC: Real-Time Multi-Physics Bond-Graph Compiler & Symplectic Solver"
+readme = "README.md"
+authors = [{ name = "Shah Md. Mahi", email = "shahmdmahi@example.com" }]
+license = { text = "MIT" }
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Topic :: Scientific/Engineering :: Electronic Design Automation (EDA)",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+keywords = ["multi-physics", "bond-graphs", "symplectic-integrator", "port-hamiltonian", "real-time", "robotics"]
+requires-python = ">=3.9"
+dependencies = [
+    "numpy>=1.20.0"
+]
+
+[project.urls]
+Homepage = "https://github.com/shahmdmahi15/rt-mpbc"
+Repository = "https://github.com/shahmdmahi15/rt-mpbc.git"
+Documentation = "https://github.com/shahmdmahi15/rt-mpbc#readme"
