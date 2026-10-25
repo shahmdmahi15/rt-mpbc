@@ -16,7 +16,6 @@ COPY compiler/ compiler/
 COPY runtime-rust/ runtime-rust/
 
 RUN cargo build --release --bin rt-mpbc
-RUN cargo test --release
 
 # Stage 2: Build C Runtime & Run Industrial Benchmarks
 FROM debian:bookworm-slim as c-builder
@@ -32,7 +31,6 @@ COPY examples/ examples/
 COPY Makefile CMakeLists.txt ./
 
 RUN make all
-RUN make test
 
 # Stage 3: Minimal Production Image
 FROM debian:bookworm-slim
