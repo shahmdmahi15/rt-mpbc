@@ -584,3 +584,38 @@ cargo test --workspace
 
 ### License
 This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for complete details.
+
+---
+
+## Author & Engineering Leadership
+
+<table align="center">
+  <tr>
+    <td align="center">
+      <img src="https://github.com/shahmdmahi15.png" width="140px;" alt="Shah Md. Mahi"/><br />
+      <sub><b>Shah Md. Mahi</b></sub><br />
+      <sub>Architect & Lead Multi-Physics Systems Engineer</sub>
+    </td>
+    <td>
+      <ul>
+        <li>🌐 <b>Website:</b> <a href="https://shahmdmahi.dpdns.org">https://shahmdmahi.dpdns.org</a></li>
+        <li>📧 <b>Email:</b> <a href="mailto:shahmdmahi15@gmail.com">shahmdmahi15@gmail.com</a></li>
+        <li>📞 <b>Phone:</b> <a href="tel:+8801757290258">+8801757290258</a></li>
+        <li>🐙 <b>GitHub:</b> <a href="https://github.com/shahmdmahi15">@shahmdmahi15</a></li>
+        <li>💼 <b>LinkedIn:</b> <a href="https://linkedin.com/in/shahmdmahi27">shahmdmahi27</a></li>
+        <li>💬 <b>Telegram:</b> <a href="https://t.me/shahmdmahi">@shahmdmahi</a></li>
+        <li>📱 <b>WhatsApp:</b> <a href="https://wa.me/8801757290258">+8801757290258</a></li>
+        <li>🎮 <b>Discord:</b> <code>shahmdmahi27</code></li>
+        <li>📷 <b>Instagram:</b> <a href="https://instagram.com/shahmdmahi27">@shahmdmahi27</a></li>
+        <li>📘 <b>Facebook:</b> <a href="https://facebook.com/shahmdmahi27">shahmdmahi27</a></li>
+      </ul>
+    </td>
+  </tr>
+</table>
+
+### Complete Engineering Systems Portfolio
+* ⚡ **RT-MPBC**: [https://rt-mpbc.shahmdmahi.dpdns.org](https://rt-mpbc.shahmdmahi.dpdns.org) — Sub-50ns Real-Time Multi-Physics Bond-Graph Compiler & Symplectic Solver
+* 🚀 **OmniDrop**: [https://omnidrop.shahmdmahi.dpdns.org](https://omnidrop.shahmdmahi.dpdns.org) — 2.5 Gbps Multi-Path P2P Content-Defined Mesh File Fabric
+* 🎙️ **SilentMic-RT**: [https://silentmic-rt.shahmdmahi.dpdns.org](https://silentmic-rt.shahmdmahi.dpdns.org) — Sub-3ms Hard Real-Time Neural Voice Isolator & Virtual Driver
+* 🧠 **OmniBrain**: [https://omnibrain.shahmdmahi.dpdns.org](https://omnibrain.shahmdmahi.dpdns.org) — Embedded Local-First Temporal Semantic Knowledge Graph & Reader Engine
+

@@ -24,6 +24,8 @@ import {
   Gauge
 } from "lucide-react";
 
+import AuthorSection from "./AuthorSection";
+
 export default function InteractiveDocs() {
   const [copiedCmd, setCopiedCmd] = useState<string | null>(null);
   const [activeCodeTab, setActiveCodeTab] = useState<"python" | "c" | "rust" | "cli">("python");
@@ -245,6 +247,7 @@ export default function InteractiveDocs() {
             <a href="#benchmarks" className="hover:text-cyan-400 transition-colors">Benchmarks</a>
             <a href="#api" className="hover:text-cyan-400 transition-colors">API & Quickstart</a>
             <a href="#competitors" className="hover:text-cyan-400 transition-colors">Competitors</a>
+            <a href="#author" className="hover:text-cyan-400 transition-colors">Author</a>
           </nav>
 
           <div className="flex items-center gap-3">
@@ -759,6 +762,9 @@ rt-mpbc compile --input powertrain.json --output-c powertrain_gen.c`}
           </div>
         </div>
       </section>
+
+      {/* Author & Creator Showcase */}
+      <AuthorSection />
 
       {/* Footer */}
       <footer className="py-12 border-t border-slate-800 bg-[#05070a] text-center text-xs text-slate-500">
