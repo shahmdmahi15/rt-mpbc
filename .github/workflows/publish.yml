@@ -1,0 +1,227 @@
+name: Release & Automated Multi-Registry Publishing
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: 'Release Tag (e.g. v1.1.0)'
+        required: false
+        default: 'v1.1.0'
+
+permissions:
+  contents: write
+  packages: write
+  id-token: write
+
+jobs:
+  # ============================================================================
+  # 1. Verification Gate: Ensure all C, Rust, and Python tests pass
+  # ============================================================================
+  test-gate:
+    name: Pre-Release Quality Verification
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Setup Rust Toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: thumbv7em-none-eabihf
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Verify C99 Runtime & Benchmarks
+        run: |
+          make clean
+          make test
+          make benchmark
+
+      - name: Verify Rust Workspace & (#![no_std])
+        run: |
+          cargo test --workspace --verbose
+          cd runtime-rust
+          cargo check --target thumbv7em-none-eabihf --no-default-features --verbose
+
+      - name: Verify Python Bindings
+        run: |
+          cd bindings/python
+          pip install .
+          python -c "import pyrtmpbc; print('pyrtmpbc import OK, version:', pyrtmpbc.__version__)"
+
+  # ============================================================================
+  # 2. Crates.io Publishing (Rust)
+  # ============================================================================
+  publish-crates-io:
+    name: Publish to Crates.io
+    needs: test-gate
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Setup Rust Toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Publish rtmpbc-runtime
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+        run: |
+          if [ -n "$CARGO_REGISTRY_TOKEN" ]; then
+            cargo publish --package rtmpbc-runtime --token "$CARGO_REGISTRY_TOKEN"
+          else
+            echo "::warning ::CARGO_REGISTRY_TOKEN secret is not set. Skipping crates.io runtime publication."
+          fi
+
+      - name: Wait for crates.io index propagation
+        run: sleep 20
+
+      - name: Publish rtmpbc-compiler
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+        run: |
+          if [ -n "$CARGO_REGISTRY_TOKEN" ]; then
+            cargo publish --package rtmpbc-compiler --token "$CARGO_REGISTRY_TOKEN"
+          else
+            echo "::warning ::CARGO_REGISTRY_TOKEN secret is not set. Skipping crates.io compiler publication."
+          fi
+
+  # ============================================================================
+  # 3. PyPI Publishing (Python)
+  # ============================================================================
+  publish-pypi:
+    name: Build & Publish to PyPI
+    needs: test-gate
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Build Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install build twine
+
+      - name: Build Python Wheel and Source Distribution
+        run: |
+          cd bindings/python
+          python -m build
+          twine check dist/*
+
+      - name: Publish to PyPI
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+        run: |
+          if [ -n "$TWINE_PASSWORD" ]; then
+            cd bindings/python
+            twine upload dist/* --non-interactive --skip-existing
+          else
+            echo "::warning ::PYPI_API_TOKEN secret is not set. Skipping PyPI publication."
+          fi
+
+  # ============================================================================
+  # 4. GitHub Container Registry (GHCR) Publishing
+  # ============================================================================
+  publish-ghcr:
+    name: Build & Publish Container Image (GHCR)
+    needs: test-gate
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry (GHCR)
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract Docker metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository }}
+          tags: |
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  # ============================================================================
+  # 5. GitHub Release Assets (Binaries, C Headers, Libraries)
+  # ============================================================================
+  publish-github-release:
+    name: Build & Attach Release Binaries
+    needs: test-gate
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Setup Rust Toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Build Standalone Compiler Binary
+        run: |
+          cargo build --release --bin rt-mpbc
+          mkdir -p dist/cli
+          cp target/release/rt-mpbc dist/cli/
+          cd dist/cli
+          tar -czvf ../rtmpbc-cli-linux-x86_64.tar.gz rt-mpbc
+
+      - name: Build Static and Dynamic C Runtime Libraries
+        run: |
+          make lib
+          mkdir -p dist/c-dev/include dist/c-dev/lib
+          cp -r runtime-c/include/* dist/c-dev/include/
+          cp librtmpbc.a librtmpbc.so dist/c-dev/lib/
+          cd dist/c-dev
+          tar -czvf ../rtmpbc-c-dev-linux-x86_64.tar.gz include lib
+
+      - name: Package Single-Header Drop-in Amalgamation
+        run: |
+          mkdir -p dist/single-header
+          cat runtime-c/include/rtmpbc.h > dist/single-header/rtmpbc.h
+          cat runtime-c/src/*.c > dist/single-header/rtmpbc.c
+          cd dist/single-header
+          tar -czvf ../rtmpbc-single-header-dropin.tar.gz rtmpbc.h rtmpbc.c
+
+      - name: Upload Binaries to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/rtmpbc-cli-linux-x86_64.tar.gz
+            dist/rtmpbc-c-dev-linux-x86_64.tar.gz
+            dist/rtmpbc-single-header-dropin.tar.gz
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
