@@ -5,12 +5,18 @@ LDFLAGS ?= -lm
 C_SRCS = runtime-c/src/rtmpbc_fixed_arena.c \
          runtime-c/src/rtmpbc_midpoint.c \
          runtime-c/src/rtmpbc_multirate.c \
-         runtime-c/src/rtmpbc_observer.c
+         runtime-c/src/rtmpbc_observer.c \
+         runtime-c/src/rtmpbc_nonlinear.c \
+         runtime-c/src/rtmpbc_switched_dirac.c \
+         runtime-c/src/rtmpbc_fault_detector.c
 
 TEST_BINS = runtime-c/tests/test_fixed_arena \
             runtime-c/tests/test_midpoint \
             runtime-c/tests/test_multirate \
-            runtime-c/tests/test_observer
+            runtime-c/tests/test_observer \
+            runtime-c/tests/test_nonlinear \
+            runtime-c/tests/test_switched_dirac \
+            runtime-c/tests/test_fault_detector
 
 BENCH_BINS = examples/01_ev_powertrain/ev_benchmark \
              examples/02_fhe_muscle_actuator/muscle_benchmark \
@@ -38,6 +44,9 @@ test: $(TEST_BINS)
 	@./runtime-c/tests/test_midpoint
 	@./runtime-c/tests/test_multirate
 	@./runtime-c/tests/test_observer
+	@./runtime-c/tests/test_nonlinear
+	@./runtime-c/tests/test_switched_dirac
+	@./runtime-c/tests/test_fault_detector
 	@echo "=== All C99 Unit Tests Passed Successfully ==="
 
 benchmark: $(BENCH_BINS)
