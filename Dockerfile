@@ -15,7 +15,7 @@ COPY Cargo.toml Cargo.lock ./
 COPY compiler/ compiler/
 COPY runtime-rust/ runtime-rust/
 
-RUN cargo build --release --bin rt_mpbc
+RUN cargo build --release --bin rt-mpbc
 RUN cargo test --release
 
 # Stage 2: Build C Runtime & Run Industrial Benchmarks
@@ -47,7 +47,7 @@ LABEL org.opencontainers.image.title="RT-MPBC" \
 WORKDIR /workspace
 
 # Copy CLI binary
-COPY --from=rust-builder /build/target/release/rt_mpbc /usr/local/bin/rt_mpbc
+COPY --from=rust-builder /build/target/release/rt-mpbc /usr/local/bin/rt-mpbc
 
 # Copy C runtime libraries and headers
 COPY --from=c-builder /build/librtmpbc.a /usr/local/lib/librtmpbc.a
@@ -56,5 +56,5 @@ COPY --from=c-builder /build/runtime-c/include/ /usr/local/include/rtmpbc/
 
 RUN ldconfig
 
-ENTRYPOINT ["rt_mpbc"]
+ENTRYPOINT ["rt-mpbc"]
 CMD ["--help"]
