@@ -5,6 +5,12 @@ edition = "2021"
 authors = ["Shah Md. Mahi <shahmdmahi15@gmail.com>"]
 description = "Bond-graph causality solver, Dirac structure synthesizer, and symbolic unroller"
 license = "MIT OR Apache-2.0"
+repository = "https://github.com/shahmdmahi15/rt-mpbc"
+homepage = "https://github.com/shahmdmahi15/rt-mpbc"
+documentation = "https://github.com/shahmdmahi15/rt-mpbc#readme"
+readme = "../README.md"
+keywords = ["physics", "real-time", "bond-graphs", "compiler", "symplectic"]
+categories = ["science", "compilers", "embedded"]
 
 [dependencies]
 serde = { version = "1.0", features = ["derive"] }

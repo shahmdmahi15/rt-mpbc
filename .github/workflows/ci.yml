@@ -1,0 +1,86 @@
+name: RT-MPBC Continuous Integration
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  c-runtime:
+    name: C99 Bare-Metal Runtime & Benchmarks
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        compiler: [gcc, clang]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Compiler
+        run: |
+          if [ "${{ matrix.compiler }}" = "clang" ]; then
+            sudo apt-get update && sudo apt-get install -y clang
+          fi
+
+      - name: Build & Run C99 Unit Tests
+        run: |
+          CC=${{ matrix.compiler }} make clean
+          CC=${{ matrix.compiler }} make test
+
+      - name: Run Sub-Microsecond Industrial Benchmarks
+        run: |
+          CC=${{ matrix.compiler }} make benchmark
+
+  rust-workspace:
+    name: Rust Compiler & Bare-Metal (#![no_std])
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Rust Toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: thumbv7em-none-eabihf
+
+      - name: Cache Cargo Dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-
+
+      - name: Test Entire Rust Workspace
+        run: cargo test --workspace --verbose
+
+      - name: Verify Bare-Metal (#![no_std]) Compilation
+        run: |
+          cd runtime-rust
+          cargo check --target thumbv7em-none-eabihf --no-default-features --verbose
+
+      - name: Test Compiler CLI Demos
+        run: |
+          cargo run --bin rt-mpbc -- demo-ev
+          cargo run --bin rt-mpbc -- demo-muscle
+          cargo run --bin rt-mpbc -- demo-robot
+
+  cmake-packaging:
+    name: CMake Package & Install Verification
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Configure CMake Build
+        run: cmake -B build -S . -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build CMake Targets
+        run: cmake --build build --config Release
+
+      - name: Run CTest
+        run: ctest --test-dir build --output-on-failure
