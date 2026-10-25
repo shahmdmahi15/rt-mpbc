@@ -1,21 +1,33 @@
-# RT-MPBC: Real-Time Multi-Physics Bond-Graph Compiler & Symplectic Solver
+<p align="center">
+  <a href="https://rt-mpbc.shahmdmahi.dpdns.org">
+    <img src="docs/assets/logo-with-text.svg" alt="RT-MPBC Logo" width="620" />
+  </a>
+</p>
 
-[![Release](https://img.shields.io/github/v/release/shahmdmahi15/rt-mpbc?color=blue&logo=github)](https://github.com/shahmdmahi15/rt-mpbc/releases/tag/v1.1.0)
-[![PyPI version](https://img.shields.io/pypi/v/pyrtmpbc?color=yellow&logo=pypi)](https://pypi.org/project/pyrtmpbc/)
-[![Crates.io](https://img.shields.io/crates/v/rtmpbc-runtime?color=orange&logo=rust)](https://crates.io/crates/rtmpbc-runtime)
-[![CI Build & Test](https://github.com/shahmdmahi15/rt-mpbc/actions/workflows/ci.yml/badge.svg)](https://github.com/shahmdmahi15/rt-mpbc/actions/workflows/ci.yml)
-[![Publishing Pipeline](https://github.com/shahmdmahi15/rt-mpbc/actions/workflows/publish.yml/badge.svg)](https://github.com/shahmdmahi15/rt-mpbc/actions/workflows/publish.yml)
-[![MISRA-C:2012](https://img.shields.io/badge/MISRA--C:2012-Compliant-green.svg)]()
-[![Rust #![no_std]](https://img.shields.io/badge/Rust-%23![no__std]-orange.svg)]()
-[![Zero Malloc](https://img.shields.io/badge/Dynamic%20Memory-0%20bytes-brightgreen.svg)]()
-[![Execution Speed](https://img.shields.io/badge/Step%20Latency-26%20ns-purple.svg)]()
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+<p align="center">
+  <strong>Real-Time Multi-Physics Bond-Graph Compiler &amp; Symplectic Geometric Solver</strong>
+</p>
+
+<p align="center">
+  <a href="https://github.com/shahmdmahi15/rt-mpbc/releases/tag/v1.1.0"><img src="https://img.shields.io/github/v/release/shahmdmahi15/rt-mpbc?color=blue&logo=github" alt="Release" /></a>
+  <a href="https://pypi.org/project/pyrtmpbc/"><img src="https://img.shields.io/pypi/v/pyrtmpbc?color=yellow&logo=pypi" alt="PyPI version" /></a>
+  <a href="https://crates.io/crates/rtmpbc-runtime"><img src="https://img.shields.io/crates/v/rtmpbc-runtime?color=orange&logo=rust" alt="Crates.io" /></a>
+  <a href="https://github.com/shahmdmahi15/rt-mpbc/actions/workflows/ci.yml"><img src="https://github.com/shahmdmahi15/rt-mpbc/actions/workflows/ci.yml/badge.svg" alt="CI Build &amp; Test" /></a>
+  <a href="https://github.com/shahmdmahi15/rt-mpbc/actions/workflows/publish.yml"><img src="https://github.com/shahmdmahi15/rt-mpbc/actions/workflows/publish.yml/badge.svg" alt="Publishing Pipeline" /></a>
+  <img src="https://img.shields.io/badge/MISRA--C:2012-Compliant-green.svg" alt="MISRA-C:2012" />
+  <img src="https://img.shields.io/badge/Rust-%23![no__std]-orange.svg" alt="Rust no_std" />
+  <img src="https://img.shields.io/badge/Dynamic%20Memory-0%20bytes-brightgreen.svg" alt="Zero Malloc" />
+  <img src="https://img.shields.io/badge/Step%20Latency-26%20ns-purple.svg" alt="Step Latency" />
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT" /></a>
+</p>
 
 > **A bare-metal, dependency-free multi-physics compiler and geometric integrator that bridges the gap between offline differential simulators and microsecond embedded control loops.**
 
-Official Documentation Website: **[https://rt-mpbc.shahmdmahi.dpdns.org](https://rt-mpbc.shahmdmahi.dpdns.org)**  
-GitHub Repository: **[https://github.com/shahmdmahi15/rt-mpbc](https://github.com/shahmdmahi15/rt-mpbc)**  
-PyPI Package: **`pip install pyrtmpbc`**
+🌐 **Official Documentation Portal &amp; Live In-Browser Simulator:** **[https://rt-mpbc.shahmdmahi.dpdns.org](https://rt-mpbc.shahmdmahi.dpdns.org)**  
+🐙 **GitHub Repository:** **[https://github.com/shahmdmahi15/rt-mpbc](https://github.com/shahmdmahi15/rt-mpbc)**  
+🐍 **PyPI Package:** **`pip install pyrtmpbc`**  
+🦀 **Crates.io:** **`cargo add rtmpbc-runtime`**  
+🐳 **GitHub Container Registry:** **`docker pull ghcr.io/shahmdmahi15/rt-mpbc:latest`**
 
 ---
 

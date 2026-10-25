@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 220" width="100%" height="100%">
+  <defs>
+    <!-- Glowing Core Gradient -->
+    <linearGradient id="textCyanBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f2fe" />
+      <stop offset="100%" stop-color="#4facfe" />
+    </linearGradient>
+
+    <linearGradient id="shieldBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f2fe" />
+      <stop offset="100%" stop-color="#7000ff" />
+    </linearGradient>
+
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1124" />
+      <stop offset="100%" stop-color="#04060b" />
+    </linearGradient>
+
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- EMBLEM ICON (Left) -->
+  <g transform="translate(10, 5) scale(0.41)">
+    <!-- Shield -->
+    <path d="M 256,24 L 464,136 L 464,376 L 256,488 L 48,376 L 48,136 Z" 
+          fill="url(#bgGrad)" 
+          stroke="url(#shieldBorder)" 
+          stroke-width="7" 
+          stroke-linejoin="round" />
+
+    <!-- Orbits -->
+    <ellipse cx="256" cy="256" rx="175" ry="70" 
+             fill="none" 
+             stroke="#00f2fe" 
+             stroke-width="4" 
+             stroke-opacity="0.8" 
+             transform="rotate(-28 256 256)" 
+             filter="url(#glow)" />
+
+    <!-- Junction Bonds -->
+    <line x1="256" y1="256" x2="140" y2="150" stroke="#00f2fe" stroke-width="5" stroke-linecap="round" />
+    <line x1="256" y1="256" x2="372" y2="150" stroke="#fda085" stroke-width="5" stroke-linecap="round" />
+    <line x1="256" y1="256" x2="256" y2="390" stroke="#e056fd" stroke-width="5" stroke-linecap="round" />
+
+    <!-- Nodes -->
+    <circle cx="140" cy="150" r="30" fill="#0c162d" stroke="#00f2fe" stroke-width="4" />
+    <text x="140" y="159" fill="#00f2fe" font-family="monospace, sans-serif" font-weight="900" font-size="22" text-anchor="middle">1_m</text>
+
+    <circle cx="372" cy="150" r="30" fill="#1f140e" stroke="#fda085" stroke-width="4" />
+    <text x="372" y="159" fill="#fda085" font-family="monospace, sans-serif" font-weight="900" font-size="22" text-anchor="middle">0_e</text>
+
+    <circle cx="256" cy="390" r="30" fill="#1b0e24" stroke="#e056fd" stroke-width="4" />
+    <text x="256" y="399" fill="#e056fd" font-family="monospace, sans-serif" font-weight="900" font-size="22" text-anchor="middle">1_th</text>
+
+    <!-- Core -->
+    <circle cx="256" cy="256" r="48" fill="#090e1a" stroke="url(#textCyanBlue)" stroke-width="5" filter="url(#glow)" />
+    <!-- Omega -->
+    <path d="M 226,282 L 242,282 C 240,260 232,246 238,234 C 244,222 256,220 256,220 C 256,220 268,222 274,234 C 280,246 272,260 270,282 L 286,282" 
+          fill="none" 
+          stroke="#ffffff" 
+          stroke-width="7" 
+          stroke-linecap="round" 
+          stroke-linejoin="round" />
+    <circle cx="256" cy="256" r="7" fill="#00f2fe" />
+  </g>
+
+  <!-- TYPOGRAPHY BRANDING (Right) -->
+  <g transform="translate(240, 45)">
+    <!-- Main Title -->
+    <text x="0" y="65" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="64" letter-spacing="-1.5">
+      <tspan fill="#ffffff">RT-</tspan><tspan fill="url(#textCyanBlue)">MPBC</tspan>
+    </text>
+
+    <!-- Version / Status Pill -->
+    <rect x="330" y="24" width="75" height="28" rx="14" fill="#0c233c" stroke="#00f2fe" stroke-width="1.5" />
+    <text x="367" y="43" fill="#00f2fe" font-family="monospace, sans-serif" font-weight="800" font-size="13" text-anchor="middle">v1.1.0</text>
+
+    <!-- Subtitle Track -->
+    <text x="0" y="105" font-family="system-ui, -apple-system, sans-serif" font-weight="700" font-size="17" fill="#94a3b8" letter-spacing="3.2">
+      REAL-TIME MULTI-PHYSICS COMPILER &amp; SOLVER
+    </text>
+
+    <!-- Tech Specs Highlights -->
+    <text x="0" y="132" font-family="monospace, sans-serif" font-weight="500" font-size="13" fill="#64748b" letter-spacing="1">
+      SUB-50ns LATENCY  •  ZERO MALLOC  •  SYMPLECTIC DIRAC PRESERVATION
+    </text>
+  </g>
+</svg>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" width="180" height="180">
+  <defs>
+    <linearGradient id="appleBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1226" />
+      <stop offset="100%" stop-color="#04060c" />
+    </linearGradient>
+    <linearGradient id="appleCyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f2fe" />
+      <stop offset="100%" stop-color="#4facfe" />
+    </linearGradient>
+  </defs>
+  <rect width="180" height="180" rx="40" fill="url(#appleBg)" stroke="#00f2fe" stroke-width="4" />
+  <g transform="translate(10, 10) scale(0.3125)">
+    <ellipse cx="256" cy="256" rx="175" ry="70" fill="none" stroke="#00f2fe" stroke-width="8" transform="rotate(-28 256 256)" stroke-opacity="0.8" />
+    <line x1="256" y1="256" x2="140" y2="150" stroke="#00f2fe" stroke-width="8" stroke-linecap="round" />
+    <line x1="256" y1="256" x2="372" y2="150" stroke="#fda085" stroke-width="8" stroke-linecap="round" />
+    <line x1="256" y1="256" x2="256" y2="390" stroke="#e056fd" stroke-width="8" stroke-linecap="round" />
+    <circle cx="140" cy="150" r="32" fill="#0c162d" stroke="#00f2fe" stroke-width="6" />
+    <text x="140" y="160" fill="#00f2fe" font-family="monospace, sans-serif" font-weight="900" font-size="24" text-anchor="middle">1_m</text>
+    <circle cx="372" cy="150" r="32" fill="#1f140e" stroke="#fda085" stroke-width="6" />
+    <text x="372" y="160" fill="#fda085" font-family="monospace, sans-serif" font-weight="900" font-size="24" text-anchor="middle">0_e</text>
+    <circle cx="256" cy="390" r="32" fill="#1b0e24" stroke="#e056fd" stroke-width="6" />
+    <text x="256" y="400" fill="#e056fd" font-family="monospace, sans-serif" font-weight="900" font-size="24" text-anchor="middle">1_th</text>
+    <circle cx="256" cy="256" r="50" fill="#090e1a" stroke="url(#appleCyan)" stroke-width="8" />
+    <path d="M 224,284 L 244,284 C 242,260 232,246 238,234 C 244,222 256,220 256,220 C 256,220 268,222 274,234 C 280,246 270,260 268,284 L 288,284" fill="none" stroke="#ffffff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="256" cy="256" r="8" fill="#00f2fe" />
+  </g>
+</svg>

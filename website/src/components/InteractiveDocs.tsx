@@ -221,17 +221,21 @@ export default function InteractiveDocs() {
       <header className="sticky top-0 z-50 backdrop-blur-xl bg-[#07090e]/80 border-b border-slate-800/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center font-black text-xl text-white shadow-lg shadow-cyan-500/20">
-              Ω
-            </div>
-            <div>
-              <span className="font-extrabold text-lg tracking-tight bg-gradient-to-r from-white via-slate-200 to-cyan-400 bg-clip-text text-transparent">
-                RT-MPBC
-              </span>
-              <span className="ml-2 text-xs px-2 py-0.5 rounded-full bg-cyan-950 border border-cyan-800 text-cyan-300 font-mono">
-                v1.1.0
-              </span>
-            </div>
+            <a href="#" className="flex items-center gap-3 group">
+              <img 
+                src="/logo.svg" 
+                alt="RT-MPBC Official Logo" 
+                className="w-10 h-10 object-contain drop-shadow-[0_0_12px_rgba(0,242,254,0.4)] group-hover:scale-105 transition-transform" 
+              />
+              <div>
+                <span className="font-extrabold text-lg tracking-tight bg-gradient-to-r from-white via-slate-200 to-cyan-400 bg-clip-text text-transparent">
+                  RT-MPBC
+                </span>
+                <span className="ml-2 text-xs px-2 py-0.5 rounded-full bg-cyan-950 border border-cyan-800 text-cyan-300 font-mono">
+                  v1.1.0
+                </span>
+              </div>
+            </a>
           </div>
 
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-400">
@@ -271,6 +275,18 @@ export default function InteractiveDocs() {
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyan-950/60 border border-cyan-800/80 text-cyan-300 text-xs font-medium mb-6">
             <Sparkles className="w-3.5 h-3.5 text-cyan-400 animate-pulse" />
             Sub-50 Nanosecond Symplectic Multi-Physics Digital Twin on Bare-Metal Silicon
+          </div>
+
+          {/* Central Hero Logo Display */}
+          <div className="flex justify-center mb-6">
+            <div className="relative group">
+              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-2xl blur-xl opacity-40 group-hover:opacity-60 transition duration-500"></div>
+              <img 
+                src="/logo.svg" 
+                alt="RT-MPBC Multi-Physics Engine Emblem" 
+                className="relative w-28 h-28 sm:w-36 sm:h-36 object-contain drop-shadow-[0_0_25px_rgba(0,242,254,0.5)] transform group-hover:scale-105 transition-all duration-300" 
+              />
+            </div>
           </div>
 
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white max-w-5xl mx-auto leading-tight">
@@ -747,8 +763,9 @@ rt-mpbc compile --input powertrain.json --output-c powertrain_gen.c`}
       {/* Footer */}
       <footer className="py-12 border-t border-slate-800 bg-[#05070a] text-center text-xs text-slate-500">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <span className="font-bold text-white">RT-MPBC</span> — Real-Time Multi-Physics Bond-Graph Compiler & Symplectic Solver
+          <div className="flex items-center gap-2.5">
+            <img src="/logo.svg" alt="RT-MPBC Logo" className="w-6 h-6 object-contain" />
+            <span className="font-bold text-white">RT-MPBC</span> — Real-Time Multi-Physics Bond-Graph Compiler &amp; Symplectic Solver
           </div>
           <div className="flex items-center gap-6 text-slate-400">
             <a href="https://github.com/shahmdmahi15/rt-mpbc" target="_blank" rel="noreferrer" className="hover:text-cyan-400 transition-colors">GitHub</a>
