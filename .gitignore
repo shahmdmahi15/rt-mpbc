@@ -27,3 +27,11 @@ examples/03_robotic_virtual_sensor/robot_benchmark
 *.swp
 *.swo
 .DS_Store
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
