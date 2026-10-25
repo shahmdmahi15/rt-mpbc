@@ -65,13 +65,15 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/icon.svg", type: "image/svg+xml" },
-      { url: "/favicon.ico", sizes: "any" }
+      { url: "/favicon.ico?v=2", sizes: "any" },
+      { url: "/favicon-32x32.png?v=2", type: "image/png", sizes: "32x32" },
+      { url: "/favicon-16x16.png?v=2", type: "image/png", sizes: "16x16" },
+      { url: "/icon.svg?v=2", type: "image/svg+xml" }
     ],
     apple: [
-      { url: "/apple-icon.svg", sizes: "180x180", type: "image/svg+xml" }
+      { url: "/apple-touch-icon.png?v=2", sizes: "180x180", type: "image/png" }
     ],
-    shortcut: ["/icon.svg"],
+    shortcut: ["/favicon.ico?v=2"],
   },
   robots: {
     index: true,
@@ -132,6 +134,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark scroll-smooth">
       <head>
+        <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
